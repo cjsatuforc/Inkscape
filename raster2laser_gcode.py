@@ -489,7 +489,7 @@ class GcodeExport(inkex.Effect):
 						for x in range(w):
 							if matrice_BN[y][x] != B :
 								if Laser_ON == False :
-									file_gcode.write('G00 X' + str(float(x)/Scala) + ' Y' + str(float(y)/Scala) + ' '+ ' S' + str(255 - matrice_BN[y][x])+'\n')
+									file_gcode.write('G00 X' + str(float(x)/Scala) + ' Y' + str(float(y)/Scala) + ' S' + str(255 - matrice_BN[y][x])+'\n')
 									file_gcode.write(self.options.laseron + ' '+'\n')
 									Laser_ON = True
 									
@@ -514,7 +514,7 @@ class GcodeExport(inkex.Effect):
 						for x in reversed(range(w)):
 							if matrice_BN[y][x] != B :
 								if Laser_ON == False :
-									file_gcode.write('G00 X' + str(float(x+1)/Scala) + ' Y' + str(float(y)/Scala) + ' '+ ' S' + str(255 - matrice_BN[y][x]) +'\n')
+									file_gcode.write('G00 X' + str(float(x+1)/Scala) + ' Y' + str(float(y)/Scala) + ' S' + str(255 - matrice_BN[y][x]) +'\n')
 									file_gcode.write(self.options.laseron +'\n')
 									Laser_ON = True
 									
@@ -531,7 +531,7 @@ class GcodeExport(inkex.Effect):
 											Laser_ON = False
 											
 										elif  matrice_BN[y][x] != matrice_BN[y][x-1] :
-											file_gcode.write('G01 X' + str(float(x)/Scala) + ' Y' + str(float(y)/Scala) + ' F' + str(F_G01) + ' '+ ' S' + str(255 - matrice_BN[y][x-1]) +'\n')
+											file_gcode.write('G01 X' + str(float(x)/Scala) + ' Y' + str(float(y)/Scala) + ' F' + str(F_G01) + ' S' + str(255 - matrice_BN[y][x-1]) +'\n')
 											file_gcode.write(self.options.laseron +'\n')
 
 			
@@ -540,9 +540,9 @@ class GcodeExport(inkex.Effect):
 			file_gcode.write('G00 X0 Y0; home\n')
 			#HOMING
 			if self.options.homing == 1:
-				file_gcode.write('G28; home all axes\n')
+				file_gcode.write('G28\n')
 			elif self.options.homing == 2:
-				file_gcode.write('$H; home all axes\n')
+				file_gcode.write('$H\n')
 			else:
 				pass
 			
