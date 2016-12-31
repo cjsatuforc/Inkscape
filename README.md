@@ -1,13 +1,14 @@
-# Various Inkscape extensions
+# Inkscape extension
 
  - K40 Raster -> Raster 2 Laser GCode generator
- - 
  
 #Descriptions
-- Raster 2 Laser GCode generator is an extension to generate Gcode for the K40 laser cutter/engraver based on the Grbl Arduino Uno controller, it can generate various type of outputs from a simple B&W (on/off) to a more detailed Grayscale (pwm)
-- This extension is based on 305 Engineering's script
-- The script has been altered to make the G code conform to Grbl 1.1e laser mode. All laser gcodes must be incorporated into the motion command e.g. G1 X0.10 Y2.10 F1000 S100 (where S100 is the laser command)
-- The script starts will M4 laser on and ends with M5 laser off. Inbetween lines there is no need for laser off commands. G0 will automatically turn off the laser
+- Raster 2 Laser G Code generator is an extension to generate laser engraving G code for the K40 laser cutter/engraver based on the Grbl (Arduino Uno controller), it can generate various type of engraving formats from a simple B&W (on/off) to a more detailed Grayscale (pwm)
+- Best is the grey scale 10 bits pixel format
+- This extension is based on 305 Engineering's original script
+- The script has been altered to make the G code conform to Grbl 1.1e laser mode. All laser gcodes must be incorporated into the motion command e.g. G1 X0.10 Y2.10 F1000 S100 (where S100 is the laser command) and single M4/5 commands
+- The script starts with a single 'M4' aka laser on and ends with 'M5' aka laser off. Inbetween lines there is no need for laser off commands. G0 will automatically turn off the laser while G1 turns it on again (laser is alternating between G0/1 commands)
+- Tip; J Tech Photonics has written an excellent Gcode cutter Inkscape extension that I use for laser cutting
 
 
 #Installing:
@@ -53,7 +54,8 @@ Following steps are to run the K40 Laser cutter engraver:
 
 
 #Note
-305 Engineering has created all the file except for png.py , see that file for details on the license
-Author (me) has modified the script to fix the G code for Grbl otherwise Grbl would not run smoothly.
+305 Engineering has created all the files except for png.py , see that file for details on the license.
+
+Author (which is me writing this) has modified the script to fix the G code for Grbl otherwise Grbl would not run smoothly.
 Grbl load every row into its ring buffer seperately, so if the SXXX command is separate, it fills it in a separate block. Now you have bocks with motion and without motion. The planner is not able to glue the motions between blocks and the result is stutter.
 Same for the M3 or M4 commands, the G parser sees them separately and stops the motion to allow the Spindle aka laser head to stop and start again. This is not what is desired. There is no need for multiple M commands since that is included into the G0 and G1 commands. G0 in Grbl always stops the laser by default and switches it on when it sees a G1 command without encounter a definite M5 stop command!
