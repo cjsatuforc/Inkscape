@@ -82,8 +82,10 @@
 		<_item value="3">No Homing</_item>
 	</param>
 	
-	<param name="laseron" type="string"  gui-text="Laser ON Command">M03</param>
-	<param name="laseroff" type="string"  gui-text="Laser OFF Command">M05</param>
+	<param name="laseron" type="string"  gui-text="Laser ON Command">M4</param>
+	<param name="laseroff" type="string"  gui-text="Laser OFF Command">M5</param>
+	#<param name="offsetx" type="string"  gui-text="Laser Offset X">1.50</param>
+	#<param name="offsety" type="string"  gui-text="Laser Offset Y">1.00</param>
 	
 	<!-- Anteprima = Solo immagine BN -->
 	<param name="preview_only" type="boolean" gui-text="Preview only">false</param>
@@ -95,10 +97,10 @@
 	<!-- 	<effect needs-live-preview="false"> -->
 	<effect needs-live-preview="false"> 
         <object-type>all</object-type>
-		<!-- Dove comparirà lo script all'interno del menù estensioni -->
-		<!--  " Estensioni => 305 Engineering => prova_estensione " -->
+		<!-- Where the script will appear in the extensions menu -->
+		<!--  " Extensions => K40 Raster => Raster2Gcode " -->
         <effects-menu>
-            <submenu name="305 Engineering"/>
+            <submenu name="K40 Raster"/>
         </effects-menu>
     </effect>
     
