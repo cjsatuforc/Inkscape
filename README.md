@@ -1,6 +1,6 @@
 # Various Inkscape extensions
 
- - K4o Raster -> Raster 2 Laser GCode generator
+ - K40 Raster -> Raster 2 Laser GCode generator
  - 
  
 #Descriptions
@@ -53,4 +53,7 @@ Following steps are to run the K40 Laser cutter engraver:
 
 
 #Note
-I have created all the file except for png.py , see that file for details on the license
+305 Engineering has created all the file except for png.py , see that file for details on the license
+Author (me) has modified the script to fix the G code for Grbl otherwise Grbl would not run smoothly.
+Grbl load every row into its ring buffer seperately, so if the SXXX command is separate, it fills it in a separate block. Now you have bocks with motion and without motion. The planner is not able to glue the motions between blocks and the result is stutter.
+Same for the M3 or M4 commands, the G parser sees them separately and stops the motion to allow the Spindle aka laser head to stop and start again. This is not what is desired. There is no need for multiple M commands since that is included into the G0 and G1 commands. G0 in Grbl always stops the laser by default and switches it on when it sees a G1 command without encounter a definite M5 stop command!
